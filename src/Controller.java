@@ -1,20 +1,26 @@
-import java.util.Date;
-
 public class Controller {
     Model model;
+    View view;
 
-    Controller(Model model){
+    Controller(Model model, View view) {
         this.model = model;
+        this.view = view;
     }
 
-    public void bookTicket(){
+    public void bookTicket(Ticket ticket) {
+
+        model.ticketList.add(ticket);
     }
 
-    public void scheduleFlight(){
-       
+    public void scheduleFlight(FlightSchedular flight) {
+        model.schedule.add(flight);
     }
 
-    public void viewTicketList(){
+    public View FlightSchedule() {
+        return view;
+    }
 
+    public void viewTicketList() {
+        model.ticketList.forEach(t -> t.getTicket());
     }
 }
