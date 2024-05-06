@@ -1,17 +1,21 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        ArrayList<FlightSchedular> flights = new ArrayList<>();
-        flights.add(new DamJed(new Date(), "23:00", "22:00"));
-        flights.add(new JedRiy(new Date(), "23:00", "22:00"));
-        flights.add(new RiyDam(new Date(), "23:00", "22:00"));
-        flights.add(new JedDam(new Date(), "23:00", "22:00"));
-        flights.add(new RiyJed(new Date(), "23:00", "22:00"));
+        Model model = new Model();
+        View view = new View();
+        Controller controller =new Controller(model, view);
+        controller.view.welcome();
 
-        for (int i = 0; i < flights.size(); i++) {
-            System.out.println(flights.get(i));
-        }
+        controller.scheduleFlight(new DamJed(new Date(), "23:20", "22:00"));
+        controller.scheduleFlight(new JedRiy(new Date(), "11:30", "10:30"));
+        controller.scheduleFlight(new RiyDam(new Date(), "20:00", "19:00"));
+        controller.scheduleFlight(new JedDam(new Date(), "00:00", "22:00"));
+        controller.scheduleFlight(new RiyJed(new Date(), "5:00", "3:30"));
+
+        controller.userLoop();
+
     }
 }
