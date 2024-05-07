@@ -43,17 +43,28 @@ public class Controller {
             System.out.println("choose a flight");
             this.printFlights();
             int flightnum = input.nextInt();
+            while(flightnum < 0 | flightnum > 4){
+                System.out.println("Invalid input, please try again!");
+                System.out.println("choose a flight");
+                flightnum = input.nextInt();
+            }
 
             System.out.println("Enter (1) for a first class flight, Enter (2) for an economy class flight ");
             int choice = input.nextInt();
             FlightClass fClass = new FlightClass();
+            while (choice != 1 && choice!=2) {
+                System.out.println("Invalid input, please try again!");
+                System.out.println("Enter (1) for a first class flight, Enter (2) for an economy class flight ");
+                choice = input.nextInt();
+            }
 
             if (choice == 1){
                fClass.setStrategy(new First());
             }
-            else{
+            else if(choice == 2){
                 fClass.setStrategy(new Economy());
             }
+            
 
             Ticket ticket = new FlightAdapter(name, number, this.model.getSchedule().get(flightnum), fClass);
             view.ticket(ticket.getFlight().getDeparture(), ticket.getFlight().getDestination(),
