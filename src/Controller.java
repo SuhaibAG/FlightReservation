@@ -61,10 +61,12 @@ public class Controller {
                     ,ticket.getName(), ticket.getPhoneNumber(), ticket.getfClass().GetClass());
             this.model.getTicketList().add(ticket);
 
-            System.out.println("Enter (1) to view ticket list");
+            System.out.println("Enter (1) to view ticket list Enter (2) to quit the system");
             choice = input.nextInt();
             if(choice == 1){
                 this.viewTicketList();
+            } else if (choice == 2){
+                done = false;
             }
 
         }
