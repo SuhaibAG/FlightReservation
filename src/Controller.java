@@ -15,7 +15,7 @@ public class Controller {
         model.addFlight(flight);
     }
 
-    public void printFlights(){
+    public void notifyFlightObserver(){
         ArrayList<FlightSchedular> scheduleFlight = model.getSchedule();
         for (int i = 0; i < scheduleFlight.size(); i++) {
             FlightSchedular flight = scheduleFlight.get(i);
@@ -23,7 +23,7 @@ public class Controller {
         }
     }
 
-   public void viewTicketList() {
+   public void notifyTicketObserver() {
        for (int i = 0; i < model.getTicketList().size(); i++) {
            Ticket ticket = model.getTicketList().get(i);
            view.ticket(ticket.getFlight().getDeparture(), ticket.getFlight().getDestination(),
@@ -41,7 +41,7 @@ public class Controller {
             System.out.println("enter your number");
             String number = input.next();
             System.out.println("choose a flight");
-            this.printFlights();
+            this.notifyFlightObserver();
             int flightnum = input.nextInt();
             while(flightnum < 0 | flightnum > 4){
                 System.out.println("Invalid input, please try again!");
@@ -75,11 +75,12 @@ public class Controller {
             System.out.println("Enter (1) to view ticket list Enter (2) to quit the system");
             choice = input.nextInt();
             if(choice == 1){
-                this.viewTicketList();
+                this.notifyTicketObserver();
             } else if (choice == 2){
                 done = false;
             }
 
         }
+
     }
 }
