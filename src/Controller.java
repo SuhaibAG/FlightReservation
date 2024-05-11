@@ -5,6 +5,7 @@ public class Controller {
     Model model;
     View view;
 
+
     Controller(Model model, View view) {
         this.model = model;
         this.view = view;
@@ -16,18 +17,20 @@ public class Controller {
     }
 
     public void notifyFlightObserver(){
+        Observer o = new View();
         ArrayList<FlightSchedular> scheduleFlight = model.getSchedule();
         for (int i = 0; i < scheduleFlight.size(); i++) {
             FlightSchedular flight = scheduleFlight.get(i);
-            view.flights(flight.getDeparture(), flight.getDestination(), flight.getDepartureTime(), flight.getArrivalTime(), i);
+            o.updateFlight(flight.getDeparture(), flight.getDestination(), flight.getDepartureTime(), flight.getArrivalTime(), i);
         }
     }
 
    public void notifyTicketObserver() {
-       for (int i = 0; i < model.getTicketList().size(); i++) {
+        Observer o = new View();
+        for (int i = 0; i < model.getTicketList().size(); i++) {
            Ticket ticket = model.getTicketList().get(i);
-           view.ticket(ticket.getFlight().getDeparture(), ticket.getFlight().getDestination(),
-                   ticket.getFlight().getDepartureTime(), ticket.getFlight().getArrivalTime()
+           o.updateTicket(ticket.getFlight().getDeparture(), ticket.getFlight().getDestination(),
+                    ticket.getFlight().getDepartureTime(), ticket.getFlight().getArrivalTime()
                    ,ticket.getName(), ticket.getPhoneNumber(), ticket.getfClass().GetClass());
 
        }
@@ -65,9 +68,9 @@ public class Controller {
                 fClass.setStrategy(new Economy());
             }
             
-
+            Observer o = new View();
             Ticket ticket = new FlightAdapter(name, number, this.model.getSchedule().get(flightnum), fClass);
-            view.ticket(ticket.getFlight().getDeparture(), ticket.getFlight().getDestination(),
+            o.updateTicket(ticket.getFlight().getDeparture(), ticket.getFlight().getDestination(),
                     ticket.getFlight().getDepartureTime(), ticket.getFlight().getArrivalTime()
                     ,ticket.getName(), ticket.getPhoneNumber(), ticket.getfClass().GetClass());
             this.model.getTicketList().add(ticket);
